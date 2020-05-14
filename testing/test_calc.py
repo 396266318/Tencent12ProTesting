@@ -19,7 +19,7 @@ class TestCalc(unittest.TestCase):
         self.assertEqual(3, result)
 
 
-unittest.main()
+# unittest.main()
 """
 if __name__ == "__main__":
     unittest.main()
