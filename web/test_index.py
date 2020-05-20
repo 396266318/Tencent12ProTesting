@@ -8,14 +8,14 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
 
-class TestDemo():
+class TestDemo(unittest.TestCase):
 
-    def setup(self):
+    def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.implicitly_wait(5)
         self.driver.maximize_window()
 
-    def teardown(self):
+    def tearDown(self):
         self.driver.quit()
 
     def test_xiugai_time(self):
