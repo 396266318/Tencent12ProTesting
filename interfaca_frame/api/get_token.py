@@ -1,3 +1,7 @@
+from string import Template
+
+import yaml
+
 from .base_api import BaseApi
 
 # 在API package 中是代表所有的接口信息的具体实现，使用公共方法代表一个接口
@@ -8,6 +12,13 @@ class GetToken(BaseApi):
     _corpid = 'ww8444cc2a2443fd63'
     _corpsecret = 'QK4IHS35gm8-E3dw7CY6GeKKrpvrqGzrw6hPzbd-4Bk'
 
+    def template(self):
+        with open("../api/get_token.yaml") as f:
+            data = { "corpid": self._corpid, "corpsecret": self._corpsecret}
+            # re = Template(f.read()).substitute(corpid=self._corpid, corpsecret=self._corpsecret)
+            re = Template(f.read()).substitute(data)
+            return yaml.safe_load(re)
+
     def get_token(self):
         req = {
             "method": "get",
@@ -17,7 +28,21 @@ class GetToken(BaseApi):
         r = self.requests_http(req)
         return r
 
+    def get_token_yaml(self):
+        req = yaml.safe_load(open("../api/get_token.yaml"))
+        r = self.requests_http(req)
+        return r
+
+    def get_template_yaml(self):
+        """调用封装的 template 传递参数 """
+        req = self.template()
+        r = self.requests_http(req)
+        return r
+
+
+
 
 # if __name__ == "__main__":
 #     a = GetToken()
-#     print(a.get_token().json())
+#     # print(a.get_token().json())
+#     a.template()
