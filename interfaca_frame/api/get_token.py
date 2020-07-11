@@ -13,13 +13,18 @@ class GetToken(BaseApi):
     _corpsecret = 'QK4IHS35gm8-E3dw7CY6GeKKrpvrqGzrw6hPzbd-4Bk'
 
     def template(self):
+        """调用模板处理传参数据"""
         with open("../api/get_token.yaml") as f:
-            data = { "corpid": self._corpid, "corpsecret": self._corpsecret}
+            data = {
+                "corpid": self._corpid,
+                "corpsecret": self._corpsecret
+            }
             # re = Template(f.read()).substitute(corpid=self._corpid, corpsecret=self._corpsecret)
             re = Template(f.read()).substitute(data)
             return yaml.safe_load(re)
 
     def get_token(self):
+        """获取token"""
         req = {
             "method": "get",
             "url": "https://qyapi.weixin.qq.com/cgi-bin/gettoken",
@@ -29,6 +34,7 @@ class GetToken(BaseApi):
         return r
 
     def get_token_yaml(self):
+        """调用yaml入参方式获取token"""
         req = yaml.safe_load(open("../api/get_token.yaml"))
         r = self.requests_http(req)
         return r
