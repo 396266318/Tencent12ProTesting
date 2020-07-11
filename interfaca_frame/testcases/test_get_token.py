@@ -1,12 +1,11 @@
-from interfaca_frame.api.get_token import GetToken
-
 # testcases 是一pytets 为测试框架 一个method 就是一个case
+from interfaca_frame.testcases.test_base import TestBase
 
 
-class TestToken:
+class TestToken(TestBase):
 
-    def setup(self):
-        self.gettokn = GetToken()
+    # def setup(self):
+    #     self.gettokn = GetToken()
 
     def test_get_token(self):
         """调用通用的API"""
